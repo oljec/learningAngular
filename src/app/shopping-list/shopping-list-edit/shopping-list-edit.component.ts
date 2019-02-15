@@ -1,6 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Ingredient } from 'src/app/shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-list-edit',
@@ -8,10 +9,9 @@ import { Ingredient } from 'src/app/shared/ingredient.model';
   styleUrls: ['./shopping-list-edit.component.css']
 })
 export class ShoppingListEditComponent implements OnInit {
-  @Output() addNewIngredient = new EventEmitter<Ingredient>();
   editForm: FormGroup;
 
-  constructor() { }
+  constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit() {
     this.editForm = new FormGroup({
@@ -26,7 +26,7 @@ export class ShoppingListEditComponent implements OnInit {
       this.editForm.get('amount').value
     );
 
-    this.addNewIngredient.emit(newIngredient);
+    this.shoppingListService.addIngredient(newIngredient);
   }
 
 }
