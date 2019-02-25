@@ -48,8 +48,8 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
     }
 
     const newIngredient = new Ingredient(
-      this.editForm.get('name').value,
-      this.editForm.get('amount').value
+      this.editForm.value['name'],
+      this.editForm.value['amount']
     );
 
     if ( this.editMode ) {
